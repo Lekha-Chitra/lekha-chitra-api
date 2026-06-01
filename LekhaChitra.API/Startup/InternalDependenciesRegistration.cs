@@ -10,9 +10,11 @@ namespace LekhaChitra.API.Startup
            IConfiguration configuration
             )
         {
- 
+            services.AddJwtServices(configuration);
+            services.AddIdentityServices();
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+ 
         }
     }
 }
