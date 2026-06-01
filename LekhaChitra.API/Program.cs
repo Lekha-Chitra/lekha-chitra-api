@@ -1,4 +1,5 @@
 
+using LekhaChitra.API.Middlewares;
 using LekhaChitra.API.Startup;
 using LekhaChitra.Application.DependencyInjection;
 using LekhaChitra.Infrastructure.Persistence.DbContext;
@@ -32,6 +33,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseMiddleware<GlobalExceptionHandlerMiddleware>();
 
 app.UseAuthorization();
 
