@@ -5,6 +5,12 @@ VisualStudioVersion = 17.14.37216.2 d17.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LekhaChitra.API", "LekhaChitra.API\LekhaChitra.API.csproj", "{A3ACC469-0E44-475D-A7FF-AC11E2F35052}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LekhaChitra.Infrastructure", "LekhaChitra.Infrastructure\LekhaChitra.Infrastructure.csproj", "{B87D5FFE-C77B-4851-B889-BDBFEB9C548E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LekhaChitra.Domain", "LekhaChitra.Domain\LekhaChitra.Domain.csproj", "{6BC85F97-EB48-4EE2-B818-3136EBEC8273}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LekhaChitra.Application", "LekhaChitra.Application\LekhaChitra.Application.csproj", "{22AE0F57-F211-49B6-B578-AC92499F2615}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +21,18 @@ Global
 		{A3ACC469-0E44-475D-A7FF-AC11E2F35052}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A3ACC469-0E44-475D-A7FF-AC11E2F35052}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A3ACC469-0E44-475D-A7FF-AC11E2F35052}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B87D5FFE-C77B-4851-B889-BDBFEB9C548E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B87D5FFE-C77B-4851-B889-BDBFEB9C548E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B87D5FFE-C77B-4851-B889-BDBFEB9C548E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B87D5FFE-C77B-4851-B889-BDBFEB9C548E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6BC85F97-EB48-4EE2-B818-3136EBEC8273}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6BC85F97-EB48-4EE2-B818-3136EBEC8273}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6BC85F97-EB48-4EE2-B818-3136EBEC8273}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6BC85F97-EB48-4EE2-B818-3136EBEC8273}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22AE0F57-F211-49B6-B578-AC92499F2615}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22AE0F57-F211-49B6-B578-AC92499F2615}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22AE0F57-F211-49B6-B578-AC92499F2615}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22AE0F57-F211-49B6-B578-AC92499F2615}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
