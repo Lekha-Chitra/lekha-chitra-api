@@ -1,10 +1,10 @@
-
 using LekhaChitra.API.Middlewares;
 using LekhaChitra.API.Startup;
 using LekhaChitra.Application.DependencyInjection;
 using LekhaChitra.Infrastructure.Persistence.DbContext;
 using Microsoft.EntityFrameworkCore;
 using Scalar.AspNetCore;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +15,9 @@ builder.Services.AddInternalDependencies(builder.Configuration);
 builder.Services.AddApplication();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
+
+Log.Logger = new LoggerConfiguration().ReadFrom.Configuration(builder.Configuration).CreateLogger();
+builder.Host.UseSerilog(Log.Logger);
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
