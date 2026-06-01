@@ -1,13 +1,15 @@
 
+using LekhaChitra.API.Startup;
+using LekhaChitra.Infrastructure.Persistence.DbContext;
 using Microsoft.EntityFrameworkCore;
 using Scalar.AspNetCore;
-using LekhaChitra.Infrastructure.Persistence.DbContext;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
+builder.Services.AddInternalDependencies(builder.Configuration);
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
