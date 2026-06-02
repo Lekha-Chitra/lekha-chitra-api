@@ -14,8 +14,7 @@ namespace LekhaChitra.Application.Features.Auth.Register.Command
     {
         private readonly UserManager<ApplicationUser> _userManager;
 
-        public RegisterCommandHandler(UserManager<ApplicationUser> userManager,
-        RoleManager<IdentityRole> roleManager)
+        public RegisterCommandHandler(UserManager<ApplicationUser> userManager)
         {
             _userManager = userManager;
         }
