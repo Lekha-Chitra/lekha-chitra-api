@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using LekhaChitra.Application.Helpers.JwtHelper;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,8 @@ namespace LekhaChitra.Application.DependencyInjection
         {
             services.AddMediatR(cfg =>
                 cfg.RegisterServicesFromAssembly(typeof(DependencyInjection).Assembly));
+
+            services.AddScoped<IJwtService, JwtService>();
 
             return services;
         }
