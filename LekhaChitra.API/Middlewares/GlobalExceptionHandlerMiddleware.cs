@@ -52,7 +52,14 @@ namespace LekhaChitra.API.Middlewares
                     problemDetails.Instance =
                         $"{context.Request.Scheme}://{context.Request.Host}{context.Request.Path}{context.Request.QueryString}";
                     break;
-
+                case JwtGenerationFailedException jwtGenerationFailedException:
+                    problemDetails.Status = StatusCodes.Status500InternalServerError;
+                    problemDetails.Detail = jwtGenerationFailedException.Message;
+                    problemDetails.Title = "Jwt Generation Failed";
+                    problemDetails.Type = jwtGenerationFailedException.GetType().Name;
+                    problemDetails.Instance =
+                        $"{context.Request.Scheme}://{context.Request.Host}{context.Request.Path}{context.Request.QueryString}";
+                    break;
                 case ResponseAlreadyStartedException responseAlreadyStartedException:
                     problemDetails.Status = StatusCodes.Status500InternalServerError;
                     problemDetails.Detail = responseAlreadyStartedException.Message;
