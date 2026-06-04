@@ -1,5 +1,8 @@
-﻿using LekhaChitra.Application.Features.Auth.Login.Command;
+﻿using LekhaChitra.Application.Features.Auth.ForgotPassword.SendOtp.Command;
+using LekhaChitra.Application.Features.Auth.ForgotPassword.VerifyOtp.Command;
+using LekhaChitra.Application.Features.Auth.Login.Command;
 using LekhaChitra.Application.Features.Auth.Register.Command;
+using LekhaChitra.Application.Interfaces.SmtpEmailService;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -12,9 +15,37 @@ namespace LekhaChitra.API.Controllers.Auth
     {
         private readonly IMediator _mediator;
 
-        public AuthController(IMediator mediator)
+        private readonly IEmailService _emailService;
+
+        public AuthController(IMediator mediator, IEmailService emailService)
         {
             _mediator = mediator;
+            _emailService = emailService;
+        }
+
+        [HttpPost]
+        [Route("forgotPassword/sendOtp")]
+        public async Task<IActionResult> SendOtp([FromBody] SendOtpCommand command)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest("model not valid");
+            }
+            var result = await _mediator.Send(command);
+            return StatusCode(result.StatusCode, result);
+
+        }
+        [HttpPost]
+        [Route("forgotPassword/verifyOtp")]
+        public async Task<IActionResult> Verify([FromBody] VerifyOtpCommand command)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest("model not valid");
+            }
+            var result = await _mediator.Send(command);
+            return StatusCode(result.StatusCode, result);
+
         }
 
         [HttpPost]
