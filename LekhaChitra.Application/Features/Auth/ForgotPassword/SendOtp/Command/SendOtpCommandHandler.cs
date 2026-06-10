@@ -38,9 +38,6 @@ namespace LekhaChitra.Application.Features.Auth.ForgotPassword.SendOtp.Command
 
             var existingOtp = _otpInMemoryDb.GetOtp(request.Email);
 
-            // =========================
-            // CASE 1: FIRST TIME OTP
-            // =========================
             if (existingOtp == null)
             {
                 var otp = _emailService.GenerateOtp();

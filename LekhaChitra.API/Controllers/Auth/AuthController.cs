@@ -1,4 +1,5 @@
-﻿using LekhaChitra.Application.Features.Auth.ForgotPassword.SendOtp.Command;
+﻿using LekhaChitra.Application.Features.Auth.ForgotPassword.ResetPassword;
+using LekhaChitra.Application.Features.Auth.ForgotPassword.SendOtp.Command;
 using LekhaChitra.Application.Features.Auth.ForgotPassword.VerifyOtp.Command;
 using LekhaChitra.Application.Features.Auth.Login.Command;
 using LekhaChitra.Application.Features.Auth.Register.Command;
@@ -23,6 +24,19 @@ namespace LekhaChitra.API.Controllers.Auth
             _emailService = emailService;
         }
 
+        [HttpPost]
+        [Route("forgotPassword/resetPassword")]
+        public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordCommand command)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest("model not valid");
+            }
+            var result = await _mediator.Send(command);
+            return StatusCode(result.StatusCode, result);
+
+        }
+     
         [HttpPost]
         [Route("forgotPassword/sendOtp")]
         public async Task<IActionResult> SendOtp([FromBody] SendOtpCommand command)
