@@ -35,6 +35,7 @@ namespace LekhaChitra.Application.Features.Auth.Register.Command
             {
                 return ServiceResponse.BadRequest("Password mismatch.");
             }
+
             var identityUser = new ApplicationUser
             {
                 Email = request.Email,
