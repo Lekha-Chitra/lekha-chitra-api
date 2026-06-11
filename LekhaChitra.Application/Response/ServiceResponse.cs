@@ -134,6 +134,16 @@ namespace LekhaChitra.Application.Response
                 StatusCode = 401,
             };
         }
+        public static ServiceResponse<T> Locked(string? message = null)
+        {
+
+            return new ServiceResponse<T>
+            {
+                IsSuccess = false,
+                Message = message ?? "Resource Locked",
+                StatusCode = 423,
+            };
+        }
         public static ServiceResponse<T> Forbidden(string? message = null)
         {
             return new ServiceResponse<T>

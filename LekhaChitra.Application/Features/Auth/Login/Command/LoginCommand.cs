@@ -10,6 +10,6 @@ namespace LekhaChitra.Application.Features.Auth.Login.Command
 {
     public record LoginCommand(
         string Email,
-        string Password) : IRequest<ServiceResponse>;
+        string Password) : IRequest<ServiceResponse<string>>;
    
 }
