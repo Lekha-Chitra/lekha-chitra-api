@@ -37,14 +37,13 @@ namespace LekhaChitra.Application.Features.Auth.Register.Command
             }
             var identityUser = new ApplicationUser
             {
-                
                 Email = request.Email,
                 NormalizedEmail = request.Email.ToUpperInvariant(),
                 UserName = request.FullName,
                 NormalizedUserName = request.FullName.ToUpperInvariant(),
                 PhoneNumber = request.PhoneNumber,
                 PhoneNumberConfirmed = true,
-
+                TenantId = Guid.NewGuid()
             };
             var result = await _userManager.CreateAsync(identityUser, request.Password);
             if (!result.Succeeded)
@@ -55,6 +54,6 @@ namespace LekhaChitra.Application.Features.Auth.Register.Command
             {
                 return ServiceResponse.Success("Registration Successful");
             }
-            }
+        }
     }
 }
