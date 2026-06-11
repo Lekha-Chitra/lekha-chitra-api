@@ -25,7 +25,10 @@ namespace LekhaChitra.Infrastructure.Persistence.DbContext
         {
             _httpContextAccessor = httpContextAccessor;
         }
-    
+
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<SubCategory> SubCategories { get; set; }
+
         public override async Task<int> SaveChangesAsync(
           CancellationToken cancellationToken = default)
         {
