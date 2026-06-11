@@ -11,6 +11,7 @@ namespace LekhaChitra.Infrastructure.Persistence.Configurations
 {
     public class CategoryConfigurations : IEntityTypeConfiguration<Category>
     {
+        // fluent API configuration
         public void Configure(EntityTypeBuilder<Category> builder)
         {
             // for table name
