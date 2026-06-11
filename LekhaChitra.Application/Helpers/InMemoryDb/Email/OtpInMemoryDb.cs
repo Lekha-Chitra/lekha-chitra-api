@@ -43,7 +43,10 @@ namespace LekhaChitra.Application.Helpers.InMemoryDb.EmailDb
             return otp;
         }
 
-       
+       public IList<KeyValuePair<string,OtpCacheModel>> GetAllOtp()
+        {
+            return _otps.ToList();
+        }
         public bool ValidateOtp(string email, string otp)
         {
             if (!_otps.TryGetValue(email, out var model))

@@ -1,4 +1,5 @@
-﻿using LekhaChitra.Application.Helpers.InMemoryDb.EmailDb;
+﻿using LekhaChitra.Application.Helpers.BackgroundServices;
+using LekhaChitra.Application.Helpers.InMemoryDb.EmailDb;
 using LekhaChitra.Application.Helpers.JwtHelper;
 using LekhaChitra.Application.Interfaces.SmtpEmailService;
 using LekhaChitra.Application.Services.SmtpEmail;
@@ -18,6 +19,7 @@ namespace LekhaChitra.Application.DependencyInjection
             services.AddMediatR(cfg =>
                 cfg.RegisterServicesFromAssembly(typeof(DependencyInjection).Assembly));
 
+            services.AddHostedService<UpdateOtpCacheBackgroundServices>();
             services.AddScoped<IJwtService, JwtService>();
             services.AddSingleton<OtpInMemoryDb>();
             services.AddScoped<IEmailService, EmailService>();
