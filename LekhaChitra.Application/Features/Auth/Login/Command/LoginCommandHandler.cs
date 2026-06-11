@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace LekhaChitra.Application.Features.Auth.Login.Command
 {
-    public class LoginCommandHandler : IRequestHandler<LoginCommand, ServiceResponse>
+    public class LoginCommandHandler : IRequestHandler<LoginCommand, ServiceResponse<string>>
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IJwtService _jwtService;
@@ -24,14 +24,14 @@ namespace LekhaChitra.Application.Features.Auth.Login.Command
             _userManager = userManager;
             _jwtService = jwtService;
         }
-        public async Task<ServiceResponse> Handle(LoginCommand request, CancellationToken cancellationToken)
+        public async Task<ServiceResponse<string>> Handle(LoginCommand request, CancellationToken cancellationToken)
         {
            var user = await _userManager.FindByEmailAsync(request.Email);
             if (user != null)
             {
                 if (await _userManager.IsLockedOutAsync(user)) //will lock after 3 failed attempts
                 {
-                    return ServiceResponse.Locked("Your account is locked. Please try again later.");
+                    return ServiceResponse<string>.Locked("Your account is locked. Please try again later.");
                 }
                 var passwordValid = await _userManager.CheckPasswordAsync(user, request.Password);
                
@@ -47,7 +47,7 @@ namespace LekhaChitra.Application.Features.Auth.Login.Command
                     var token = await _jwtService.GenerateNewJsonWebToken(authClaims);
                     if (token == null)
                     {
-                        return ServiceResponse.Unauthorized("Invalid email or password.");
+                        return ServiceResponse<string>.Unauthorized("Invalid email or password.");
                     }
                     await _userManager.ResetAccessFailedCountAsync(user);
                     return ServiceResponse<string>.Success(token, "User login successful");
@@ -55,12 +55,12 @@ namespace LekhaChitra.Application.Features.Auth.Login.Command
                 else
                 {
                     await _userManager.AccessFailedAsync(user);
-                    return ServiceResponse.Unauthorized("Invalid email or password.");
+                    return ServiceResponse<string>.Unauthorized("Invalid email or password.");
                 }
             }
             else {
                
-                return ServiceResponse.Unauthorized("Invalid email or password.");
+                return ServiceResponse<string>.Unauthorized("Invalid email or password.");
             }
 
         }

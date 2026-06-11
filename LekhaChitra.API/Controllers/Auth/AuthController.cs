@@ -5,6 +5,7 @@ using LekhaChitra.Application.Features.Auth.Login.Command;
 using LekhaChitra.Application.Features.Auth.Register.Command;
 using LekhaChitra.Application.Interfaces.SmtpEmailService;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -36,6 +37,8 @@ namespace LekhaChitra.API.Controllers.Auth
             return StatusCode(result.StatusCode, result);
 
         }
+
+
      
         [HttpPost]
         [Route("forgotPassword/sendOtp")]
@@ -84,6 +87,18 @@ namespace LekhaChitra.API.Controllers.Auth
                 return BadRequest("model not valid");
             }
             var result = await _mediator.Send(command);
+
+            if (result.Data is not null)
+            {
+                Response.Cookies.Append("MyAuthValue", result.Data, new CookieOptions
+                {
+                    HttpOnly = true,
+                    Secure = false, // dev only
+                    SameSite = SameSiteMode.Lax,
+                    Expires = DateTime.UtcNow.AddHours(1),
+                    Path = "/"
+                });
+            }
             return StatusCode(result.StatusCode, result);
 
         }
