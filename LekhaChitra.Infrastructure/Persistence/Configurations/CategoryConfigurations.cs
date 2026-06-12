@@ -23,11 +23,17 @@ namespace LekhaChitra.Infrastructure.Persistence.Configurations
                      .IsRequired()
                      .HasMaxLength(100);
 
+            builder.Property(x => x.TenantId)
+                   .IsRequired();
+
             // 1:M relationship with SubCategory
             builder.HasMany(x => x.SubCategories)
                      .WithOne(x => x.Category)
                      .HasForeignKey(x => x.CategoryId)
                      .OnDelete(DeleteBehavior.Cascade);
+            builder.HasIndex(x => x.TenantId);
+            builder.HasIndex(x => new { x.TenantId, x.Name })
+            .IsUnique();
         }
     }
 }
