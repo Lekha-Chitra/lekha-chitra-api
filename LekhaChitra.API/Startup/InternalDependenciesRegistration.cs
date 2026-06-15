@@ -1,4 +1,4 @@
-﻿using LekhaChitra.Application.DTO;
+﻿using LekhaChitra.Application.DTO.Email;
 using LekhaChitra.Application.Interfaces.Data;
 using LekhaChitra.Application.Interfaces.SmtpEmailService;
 using LekhaChitra.Application.Services.SmtpEmail;
@@ -13,8 +13,9 @@ namespace LekhaChitra.API.Startup
            IConfiguration configuration
             )
         {
-            services.AddJwtServices(configuration);
+          
             services.AddIdentityServices();
+            services.AddJwtServices(configuration);
             services.Configure<SmtpEmailSettingDTO>(configuration.GetSection("Smtp"));
        
             services.AddScoped<IUnitOfWork, UnitOfWork>();

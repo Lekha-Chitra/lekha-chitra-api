@@ -49,14 +49,14 @@ namespace LekhaChitra.API.Startup
                     {
                         OnMessageReceived = context =>
                         {
-                            // ✅ 1. PRIORITY: Cookie-based JWT (your current approach)
+                            //1. PRIORITY: Cookie-based JWT (your current approach)
                             if (context.Request.Cookies.TryGetValue("MyAuthValue", out var cookieToken))
                             {
                                 context.Token = cookieToken;
                                 return Task.CompletedTask;
                             }
 
-                            // (Optional) 2. Fallback: Authorization header (for Postman/Swagger flexibility)
+                            // 2. Fallback: Authorization header (for Postman/Swagger flexibility)
                             var authHeader = context.Request.Headers.Authorization.ToString();
                             if (!string.IsNullOrEmpty(authHeader) && authHeader.StartsWith("Bearer "))
                             {

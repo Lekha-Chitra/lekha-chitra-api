@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LekhaChitra.Application.DTO
+namespace LekhaChitra.Application.DTO.Email
 {
     public class SmtpEmailSettingDTO
     {

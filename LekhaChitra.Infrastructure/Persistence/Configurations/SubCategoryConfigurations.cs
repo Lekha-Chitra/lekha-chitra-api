@@ -1,4 +1,5 @@
-﻿using LekhaChitra.Domain.Entities.Application.Categories;
+﻿
+using LekhaChitra.Domain.Entities.Application.Categories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
@@ -21,10 +22,18 @@ namespace LekhaChitra.Infrastructure.Persistence.Configurations
                     .IsRequired()
                     .HasMaxLength(100);
 
+            builder.Property(x => x.TenantId)
+                    .IsRequired();
+
             builder.Property(x => x.CategoryId)
                          .IsRequired();
 
             builder.HasIndex(x => x.CategoryId);
+            builder.HasIndex(x => x.TenantId);
+
+            //prevent duplicate subcategory names within the same tenant
+            builder.HasIndex(x => new { x.TenantId, x.SubCategoryName })
+              .IsUnique();
 
         }
     }

@@ -41,6 +41,7 @@ namespace LekhaChitra.Application.Features.Auth.Login.Command
                     {
                         new Claim(ClaimTypes.NameIdentifier, user.Id),
                         new Claim(ClaimTypes.Email, user.Email),
+                       new Claim("tenantId", user.TenantId.ToString()),
                         new Claim("JWTID", Guid.NewGuid().ToString()),
                     };
 
