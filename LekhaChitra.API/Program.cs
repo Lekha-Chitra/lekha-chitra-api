@@ -10,6 +10,8 @@ using Microsoft.OpenApi;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+var port = Environment.GetEnvironmentVariable("PORT") ?? "5000";
+builder.WebHost.UseUrls($"http://*:{port}");
 
 builder.Services.AddControllers();
 builder.Services.AddInternalDependencies(builder.Configuration);
@@ -18,13 +20,6 @@ builder.Services.AddApplication();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(option =>
 {
-    //option.AddSecurityDefinition("Tenant", new OpenApiSecurityScheme
-    //{55555555555555555555555555555555\\\\
-    //    Name = "X-Tenant-Id",
-    //    Type = SecuritySchemeType.ApiKey,
-    //    In = ParameterLocation.Header,
-    //    Description = "Tenant Id (Hospital Tenant)"
-    //});
 
     option.SwaggerDoc("v1", new OpenApiInfo { Title = "Signin Manager", Version = "v1" });
     option.AddSecurityDefinition(
@@ -62,7 +57,8 @@ builder.Services.AddCors(options =>
         "CorsPolicy",
         policy =>
         {
-            policy.WithOrigins("http://localhost:5173") 
+            // policy.WithOrigins("http://localhost:5173") 
+            policy.AllowAnyOrigin()
             .AllowAnyHeader()
             .AllowAnyMethod()
             .AllowCredentials();
@@ -77,7 +73,11 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+if (!app.Environment.IsProduction())
+{
+    app.UseHttpsRedirection();
 
+}
 // Configure the HTTP request pipeline.
 //if (app.Environment.IsDevelopment())
 //{
@@ -96,7 +96,7 @@ if (app.Environment.IsDevelopment())
 
 //}
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
 app.UseStaticFiles();
 
