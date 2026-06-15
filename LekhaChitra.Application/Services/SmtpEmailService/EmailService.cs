@@ -1,4 +1,4 @@
-﻿using LekhaChitra.Application.DTO;
+﻿using LekhaChitra.Application.DTO.Email;
 using LekhaChitra.Application.Helpers.InMemoryDb.EmailDb;
 using LekhaChitra.Application.Interfaces.SmtpEmailService;
 using Microsoft.Extensions.Configuration;
