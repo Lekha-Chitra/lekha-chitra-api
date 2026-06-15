@@ -1,6 +1,7 @@
 ﻿using LekhaChitra.Application.Helpers.BackgroundServices;
 using LekhaChitra.Application.Helpers.InMemoryDb.EmailDb;
 using LekhaChitra.Application.Helpers.JwtHelper;
+using LekhaChitra.Application.Helpers.TenantService;
 using LekhaChitra.Application.Interfaces.SmtpEmailService;
 using LekhaChitra.Application.Services.SmtpEmail;
 using Microsoft.Extensions.DependencyInjection;
@@ -23,6 +24,7 @@ namespace LekhaChitra.Application.DependencyInjection
             services.AddScoped<IJwtService, JwtService>();
             services.AddSingleton<OtpInMemoryDb>();
             services.AddScoped<IEmailService, EmailService>();
+            services.AddScoped<ITenantService, TenantService>();
 
             return services;
         }

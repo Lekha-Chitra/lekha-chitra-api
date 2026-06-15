@@ -1,4 +1,5 @@
-﻿using LekhaChitra.Application.Interfaces.Data;
+﻿using LekhaChitra.Application.Helpers.TenantService;
+using LekhaChitra.Application.Interfaces.Data;
 using LekhaChitra.Application.Response;
 using LekhaChitra.Domain.Entities.Application.Categories;
 using MediatR;
@@ -14,13 +15,22 @@ namespace LekhaChitra.Application.Features.Categories.AddCategory
     public class AddCategoryCommandHandler : IRequestHandler<AddCategoryCommand, ServiceResponse>
     {
         private readonly IUnitOfWork _uow;
+        private readonly ITenantService _tenantService;
 
-        public AddCategoryCommandHandler( IUnitOfWork uow)
+        public AddCategoryCommandHandler(
+            IUnitOfWork uow,
+            ITenantService tenantService)
         {
             _uow = uow;
+            _tenantService = tenantService;
         }
         public async Task<ServiceResponse> Handle(AddCategoryCommand request, CancellationToken cancellationToken)
         {
+            var tenantId = _tenantService.GetTenantId;
+            if (tenantId == Guid.Empty)
+            { 
+                return ServiceResponse.Unauthorized("Access denied.");
+            }
             var categoryExists = await _uow.AsyncRepositories<Category>()
                                            .GetQueryable()
                                            .Where(x => x.Name == request.Name)
@@ -32,7 +42,8 @@ namespace LekhaChitra.Application.Features.Categories.AddCategory
             else {
                 var category = new Category()
                 {
-                    Name = request.Name
+                    Name = request.Name,
+                    TenantId = tenantId
                 };
                 var result = await _uow.AsyncRepositories<Category>().AddAsync(category);
                 if (result != null)
