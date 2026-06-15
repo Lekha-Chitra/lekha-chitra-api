@@ -46,18 +46,6 @@ namespace LekhaChitra.API.Controllers.Categories
             return StatusCode(result.StatusCode, result);
         }
 
-        [HttpPost]
-        [Route("getCategories")]
-        [Authorize]
-        public async Task<IActionResult> GetCategories(CancellationToken ct)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest("model not valid");
-            }
-            var result = await _mediator.Send(new GetCategoriesQuery(), ct);
-            return StatusCode(result.StatusCode, result);
-
-        }
+       
     }
 }
