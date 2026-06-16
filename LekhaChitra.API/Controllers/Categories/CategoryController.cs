@@ -1,6 +1,8 @@
 ﻿using LekhaChitra.Application.Features.Auth.ForgotPassword.ResetPassword;
 using LekhaChitra.Application.Features.Categories.AddCategory;
 using LekhaChitra.Application.Features.Categories.GetCategory;
+using LekhaChitra.Application.Features.SubCategories.AddSubCategory;
+using LekhaChitra.Application.Features.SubCategories.GetSubCategory;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -14,12 +16,12 @@ namespace LekhaChitra.API.Controllers.Categories
     public class CategoryController : ControllerBase
     {
         private readonly IMediator _mediator;
-        public CategoryController(IMediator mediator) 
+        public CategoryController(IMediator mediator)
         {
             _mediator = mediator;
         }
 
-        
+
         [HttpPost]
         [Route("addCategory")]
         [Authorize]
@@ -33,7 +35,7 @@ namespace LekhaChitra.API.Controllers.Categories
             return StatusCode(result.StatusCode, result);
         }
 
-        [HttpPost]
+        [HttpGet]
         [Route("getCategories")]
         [Authorize]
         public async Task<IActionResult> GetCategories(CancellationToken ct)
@@ -47,17 +49,31 @@ namespace LekhaChitra.API.Controllers.Categories
         }
 
         [HttpPost]
-        [Route("getCategories")]
+        [Route("addSubCategory")]
         [Authorize]
-        public async Task<IActionResult> GetCategories(CancellationToken ct)
+        public async Task<IActionResult> AddSubCategory([FromBody] AddSubCategoryCommand command)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest("model not valid");
             }
-            var result = await _mediator.Send(new GetCategoriesQuery(), ct);
+            var result = await _mediator.Send(command);
             return StatusCode(result.StatusCode, result);
 
+        }
+
+
+        [HttpGet]
+        [Route("getSubCategories")]
+        [Authorize]
+        public async Task<IActionResult> GetSubCategories(CancellationToken ct)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest("model not valid");
+            }
+            var result = await _mediator.Send(new GetSubCategoryQuery(), ct);
+            return StatusCode(result.StatusCode, result);
         }
     }
 }
