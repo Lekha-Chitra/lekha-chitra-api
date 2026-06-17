@@ -1,0 +1,18 @@
+{
+  "dependencies": {
+    "apis1": {
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.ApiManagement/service/LekhaChitraAPIapi/apis/LekhaChitraAPI",
+      "type": "apis.azure"
+    },
+    "identityapp1": {
+      "connectionInfo": "App registration: LekhaChitraAPIapi, Tenant: Lumbini Engineering, Management and Science College (lumbini.edu.np - Microsoft Entra ID)",
+      "type": "identityapp.default"
+    },
+    "mssql1": {
+      "secretStore": "AzureAppSettings",
+      "type": "mssql.onprem",
+      "connectionId": "ConnectionStrings:DatabaseConnection",
+      "dynamicId": null
+    }
+  }
+}
