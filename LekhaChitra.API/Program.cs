@@ -26,7 +26,7 @@ builder.Services.AddSwaggerGen(option =>
     //    Description = "Tenant Id (Hospital Tenant)"
     //});
 
-    option.SwaggerDoc("v1", new OpenApiInfo { Title = "Signin Manager", Version = "v1" });
+    option.SwaggerDoc("v1", new OpenApiInfo { Title = "Lekha Chitra", Version = "v1" });
     option.AddSecurityDefinition(
         "Bearer",
         new OpenApiSecurityScheme
