@@ -1,4 +1,5 @@
-﻿using LekhaChitra.Domain.Entities.Base;
+﻿using LekhaChitra.Domain.Entities.Application.Clients;
+using LekhaChitra.Domain.Entities.Base;
 using LekhaChitra.Domain.Interface.Entity;
 using System;
 using System.Collections.Generic;
@@ -14,5 +15,6 @@ namespace LekhaChitra.Domain.Entities.Application.Categories
         public int CategoryId { get; set; }
         public Category Category { get; set; } = null!;
         public Guid TenantId { get; set; }
+        public ICollection<Client> Clients { get; set; } = new List<Client>();
     }
 }
