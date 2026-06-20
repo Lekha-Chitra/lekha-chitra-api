@@ -11,7 +11,7 @@ using System.Threading;
 
 namespace LekhaChitra.API.Controllers.Categories
 {
-    [Route("api/[controller]")]
+    [Route("api/V1/[controller]")]
     [ApiController]
     public class CategoryController : ControllerBase
     {
