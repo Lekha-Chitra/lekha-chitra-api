@@ -123,8 +123,8 @@ namespace LekhaChitra.Application.Features.Transaction.AddTransaction
                     }
                     else
                     {
-                        payment.Status = PaymentStatusEnum.Completed.ToString();
-                        await _uow.AsyncRepositories<Payment>().UpdateAsync(payment);
+                        //payment.Status = PaymentStatusEnum.Completed.ToString();
+                        //await _uow.AsyncRepositories<Payment>().UpdateAsync(payment);
                         await _uow.Save();
                         return ServiceResponse.Success("Transaction created successfully.");
                     }
