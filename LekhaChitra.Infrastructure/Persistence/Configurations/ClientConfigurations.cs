@@ -20,7 +20,7 @@ namespace LekhaChitra.Infrastructure.Persistence.Configurations
             builder.HasKey(x => x.Id);
 
             // Decimal precision
-            builder.Property(x => x.Amount)
+            builder.Property(x => x.Balance)
                 .HasColumnType("decimal(18,2)");
 
             builder.Property(x => x.EstimatedBudget)

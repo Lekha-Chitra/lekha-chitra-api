@@ -1,5 +1,6 @@
 ﻿using LekhaChitra.Domain.Entities.Application.Categories;
 using LekhaChitra.Domain.Entities.Application.Clients;
+using LekhaChitra.Domain.Entities.Application.Transactions;
 using LekhaChitra.Domain.Entities.Application.User;
 using LekhaChitra.Domain.Interface.Entity;
 using LekhaChitra.Infrastructure.Persistence.Configurations;
@@ -34,6 +35,8 @@ namespace LekhaChitra.Infrastructure.Persistence.DbContext
             modelBuilder.ApplyConfiguration(new ClientConfigurations());
             modelBuilder.ApplyConfiguration(new SubCategoryConfigurations());
             modelBuilder.ApplyConfiguration(new CategoryConfigurations());
+            modelBuilder.ApplyConfiguration(new TransactionConfigurations());
+            modelBuilder.ApplyConfiguration(new PaymentConfigurations());
 
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
         }
@@ -41,7 +44,8 @@ namespace LekhaChitra.Infrastructure.Persistence.DbContext
         public DbSet<Category> Categories { get; set; }
         public DbSet<SubCategory> SubCategories { get; set; }
         public DbSet<Client> Clients { get; set; }
-
+        public DbSet<Transaction> Transactions { get; set; }
+        public DbSet<Payment> Payment { get; set; }
         public override async Task<int> SaveChangesAsync(
           CancellationToken cancellationToken = default)
         {
