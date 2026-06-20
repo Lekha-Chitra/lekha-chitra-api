@@ -13,7 +13,7 @@ namespace LekhaChitra.Domain.Entities.Application.Clients
     {
         public string Name { get; set; }
         public string Status { get; set; }
-        public decimal Amount { get; set; }
+        public decimal Balance { get; set; }
         public string Description { get; set; }
         public string Remarks { get; set; }
         public decimal EstimatedBudget { get; set; }

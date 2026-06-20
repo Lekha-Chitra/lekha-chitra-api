@@ -65,7 +65,7 @@ namespace LekhaChitra.Application.Features.Clients.AddClients
                     Id = Guid.NewGuid(),
                     Name = request.Client.Name,
                     Status = status.ToString(),
-                    Amount = request.Client.Amount,
+                    Balance = request.Client.Amount,
                     Description = request.Client.Description,
                     Remarks = request.Client.Remarks,
                     EstimatedBudget = request.Client.EstimatedBudget,
