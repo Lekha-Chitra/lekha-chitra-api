@@ -93,8 +93,8 @@ namespace LekhaChitra.API.Controllers.Auth
                 Response.Cookies.Append("MyAuthValue", result.Data, new CookieOptions
                 {
                     HttpOnly = true,
-                    Secure = false, // dev only
-                    SameSite = SameSiteMode.Lax,
+                    Secure = true,
+                    SameSite = SameSiteMode.None,
                     Expires = DateTime.UtcNow.AddHours(1),
                     Path = "/"
                 });
