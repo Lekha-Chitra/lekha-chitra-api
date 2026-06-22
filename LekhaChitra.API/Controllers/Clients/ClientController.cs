@@ -1,4 +1,6 @@
-﻿using LekhaChitra.Application.Features.Clients.AddClients;
+﻿using LekhaChitra.Application.DTO.Clients;
+using LekhaChitra.Application.Features.Clients.AddClients;
+using LekhaChitra.Application.Features.Clients.FilterClients;
 using LekhaChitra.Application.Features.Clients.GetClients.GetAllClients;
 using LekhaChitra.Application.Features.SubCategories.AddSubCategory;
 using MediatR;
@@ -45,6 +47,19 @@ namespace LekhaChitra.API.Controllers.Clients
             var result = await _mediator.Send(new GetAllClientQuery(pageNumber,pageSize),ct);
             return StatusCode(result.StatusCode, result);
 
+        }
+
+        [HttpGet]
+        [Route("filterClients")]
+        [Authorize]
+        public async Task<IActionResult> FilterClients([FromQuery] GetClientFilter filter,
+                                                      CancellationToken cancellationToken)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest("Model not valid");
+
+            var result = await _mediator.Send(new FilterClientQuery(filter),cancellationToken);
+             return StatusCode(result.StatusCode, result);
         }
     }
 }
