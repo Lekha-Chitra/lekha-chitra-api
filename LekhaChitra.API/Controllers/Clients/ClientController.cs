@@ -33,7 +33,7 @@ namespace LekhaChitra.API.Controllers.Clients
         }
 
         [HttpGet]
-        [Route("getAllClient")]
+        [Route("getAllClients")]
         [Authorize]
         public async Task<IActionResult> GetClient([FromQuery] int pageNumber = 1,
                                                     [FromQuery] int pageSize = 10,CancellationToken ct = default)
