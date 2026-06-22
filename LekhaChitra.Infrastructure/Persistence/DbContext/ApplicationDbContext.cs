@@ -102,7 +102,7 @@ namespace LekhaChitra.Infrastructure.Persistence.DbContext
                         fullAudited.AddedBy = userId;
                         fullAudited.AddedDate = DateTime.UtcNow;
                     }
-                    else if (entry.State == EntityState.Modified)
+                    if (entry.State == EntityState.Modified)
                     {
                         fullAudited.ModifiedBy = userId;
                         fullAudited.ModifiedDate = DateTime.UtcNow;
