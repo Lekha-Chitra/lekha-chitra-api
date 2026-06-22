@@ -64,7 +64,7 @@ namespace LekhaChitra.Application.Features.Transaction.AddTransaction
                     Amount = request.AddTransaction.Amount,
                     PaymentMethod = paymentMethod.ToString(),
                     PaymentType = paymentType.ToString(),
-                    Status = PaymentStatusEnum.Pending.ToString(),
+                    Status = PaymentStatusEnum.Completed.ToString(),
                     TenantId = tenantId,
 
                 };
