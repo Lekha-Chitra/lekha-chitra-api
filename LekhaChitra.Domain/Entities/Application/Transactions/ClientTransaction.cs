@@ -1,4 +1,5 @@
-﻿using LekhaChitra.Domain.Entities.Base;
+﻿using LekhaChitra.Domain.Entities.Application.Clients;
+using LekhaChitra.Domain.Entities.Base;
 using LekhaChitra.Domain.Interface.Entity;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace LekhaChitra.Domain.Entities.Application.Transactions
 {
-    public class Transaction : Entity<Guid>, ITenantEntity, IDateAudited, ISoftDelete
+    public class ClientTransaction : Entity<Guid>, ITenantEntity, IDateAudited, ISoftDelete
     {
         public Guid TO { get; set; }
         public Guid From { get; set; }

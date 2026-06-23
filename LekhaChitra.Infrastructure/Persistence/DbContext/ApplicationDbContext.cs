@@ -44,7 +44,7 @@ namespace LekhaChitra.Infrastructure.Persistence.DbContext
         public DbSet<Category> Categories { get; set; }
         public DbSet<SubCategory> SubCategories { get; set; }
         public DbSet<Client> Clients { get; set; }
-        public DbSet<Transaction> Transactions { get; set; }
+        public DbSet<ClientTransaction> Transactions { get; set; }
         public DbSet<Payment> Payment { get; set; }
         public override async Task<int> SaveChangesAsync(
           CancellationToken cancellationToken = default)
