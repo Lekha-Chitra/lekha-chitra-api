@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace LekhaChitra.Infrastructure.Persistence.Configurations
 {
-    public class TransactionConfigurations : IEntityTypeConfiguration<Transaction>
+    public class TransactionConfigurations : IEntityTypeConfiguration<ClientTransaction>
     {
-        public void Configure(EntityTypeBuilder<Transaction> builder)
+        public void Configure(EntityTypeBuilder<ClientTransaction> builder)
         {
             builder.ToTable("Transactions");
 
@@ -45,8 +45,23 @@ namespace LekhaChitra.Infrastructure.Persistence.Configurations
 
             builder.HasOne(x => x.Payment)
                    .WithOne(x => x.Transaction)
-                   .HasForeignKey<Transaction>(x => x.PaymentId)
+                   .HasForeignKey<ClientTransaction>(x => x.PaymentId)
                    .OnDelete(DeleteBehavior.Restrict);
+
+            //builder.HasOne(x => x.ToClient)
+            //        .WithMany()
+            //        .HasForeignKey(x => x.TO)
+            //        .OnDelete(DeleteBehavior.NoAction);
+
+            //builder.HasOne(x => x.FromClient)
+            //        .WithMany()
+            //        .HasForeignKey(x => x.From)
+            //        .OnDelete(DeleteBehavior.NoAction);
+
+            //builder.HasOne(x => x.Client)
+            //        .WithMany()
+            //        .HasForeignKey(x => x.ClientId)
+            //        .OnDelete(DeleteBehavior.NoAction);
 
         }
     }

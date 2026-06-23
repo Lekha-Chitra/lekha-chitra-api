@@ -29,9 +29,9 @@ namespace LekhaChitra.Infrastructure.Persistence.Configurations
                    .IsRequired()
                    .HasMaxLength(50);
 
-            builder.Property(x => x.Status)
-                   .IsRequired()
-                   .HasMaxLength(30);
+            //builder.Property(x => x.Status)
+            //       .IsRequired()
+            //       .HasMaxLength(30);
 
             builder.Property(x => x.TenantId)
                    .IsRequired();
@@ -44,7 +44,7 @@ namespace LekhaChitra.Infrastructure.Persistence.Configurations
 
             builder.HasOne(x => x.Transaction)
                    .WithOne(x => x.Payment)
-                   .HasForeignKey<Transaction>(x => x.PaymentId)
+                   .HasForeignKey<ClientTransaction>(x => x.PaymentId)
                    .OnDelete(DeleteBehavior.Restrict);
         }
     }

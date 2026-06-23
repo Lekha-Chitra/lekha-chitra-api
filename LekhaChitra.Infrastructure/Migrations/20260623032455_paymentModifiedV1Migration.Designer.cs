@@ -4,6 +4,7 @@ using LekhaChitra.Infrastructure.Persistence.DbContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LekhaChitra.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260623032455_paymentModifiedV1Migration")]
+    partial class paymentModifiedV1Migration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -155,7 +158,7 @@ namespace LekhaChitra.Infrastructure.Migrations
                     b.Property<DateTime?>("AddedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("ClientId")
+                    b.Property<Guid?>("ClientId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("DeletedBy")
@@ -196,8 +199,14 @@ namespace LekhaChitra.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ClientId");
+
+                    b.HasIndex("From");
+
                     b.HasIndex("PaymentId")
                         .IsUnique();
+
+                    b.HasIndex("TO");
 
                     b.HasIndex("TenantId");
 
@@ -465,13 +474,36 @@ namespace LekhaChitra.Infrastructure.Migrations
 
             modelBuilder.Entity("LekhaChitra.Domain.Entities.Application.Transactions.ClientTransaction", b =>
                 {
+                    b.HasOne("LekhaChitra.Domain.Entities.Application.Clients.Client", "Client")
+                        .WithMany()
+                        .HasForeignKey("ClientId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("LekhaChitra.Domain.Entities.Application.Clients.Client", "FromClient")
+                        .WithMany()
+                        .HasForeignKey("From")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
                     b.HasOne("LekhaChitra.Domain.Entities.Application.Transactions.Payment", "Payment")
                         .WithOne("Transaction")
                         .HasForeignKey("LekhaChitra.Domain.Entities.Application.Transactions.ClientTransaction", "PaymentId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.HasOne("LekhaChitra.Domain.Entities.Application.Clients.Client", "ToClient")
+                        .WithMany()
+                        .HasForeignKey("TO")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Client");
+
+                    b.Navigation("FromClient");
+
                     b.Navigation("Payment");
+
+                    b.Navigation("ToClient");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
