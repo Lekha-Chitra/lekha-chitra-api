@@ -14,7 +14,6 @@ namespace LekhaChitra.Domain.Entities.Application.Transactions
         public decimal Amount { get; set; }
         public string PaymentMethod { get; set; }  
         public string PaymentType { get; set; }
-        //public string Status { get; set; } 
         public Guid TenantId { get; set; }
         public DateTime? ModifiedDate { get; set; }
         public DateTime? AddedDate { get; set; }
