@@ -1,5 +1,4 @@
 ﻿using LekhaChitra.Application.DTO.Clients;
-using LekhaChitra.Application.Features.Clients.GetClients.GetAllClients;
 using LekhaChitra.Application.Helpers.TenantService;
 using LekhaChitra.Application.Interfaces.Data;
 using LekhaChitra.Application.Response;
