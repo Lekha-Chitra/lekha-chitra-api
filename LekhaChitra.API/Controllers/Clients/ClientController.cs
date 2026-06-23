@@ -1,5 +1,5 @@
 ﻿using LekhaChitra.Application.DTO.Clients;
-using LekhaChitra.Application.Features.Clients.AddClients;
+using LekhaChitra.Application.Features.Clients.Command.AddClients;
 using LekhaChitra.Application.Features.Clients.FilterClients;
 using LekhaChitra.Application.Features.Clients.GetClients.GetAllClients;
 using LekhaChitra.Application.Features.SubCategories.AddSubCategory;

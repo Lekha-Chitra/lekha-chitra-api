@@ -1,6 +1,6 @@
 ﻿using LekhaChitra.Application.Features.Clients.AddClients;
-using LekhaChitra.Application.Features.Transaction.AddTransaction;
-using LekhaChitra.Application.Features.Transaction.DeleteTransaction;
+using LekhaChitra.Application.Features.Transaction.Command.AddTransaction;
+using LekhaChitra.Application.Features.Transaction.Command.DeleteTransaction;
 using LekhaChitra.Application.Features.Transaction.GetTransaction;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;

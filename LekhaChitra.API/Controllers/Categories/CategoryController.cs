@@ -1,7 +1,7 @@
 ﻿using LekhaChitra.Application.Features.Auth.ForgotPassword.ResetPassword;
-using LekhaChitra.Application.Features.Categories.AddCategory;
+using LekhaChitra.Application.Features.Categories.Command.AddCategory;
 using LekhaChitra.Application.Features.Categories.GetCategory;
-using LekhaChitra.Application.Features.SubCategories.AddSubCategory;
+using LekhaChitra.Application.Features.SubCategories.Command.AddSubCategory;
 using LekhaChitra.Application.Features.SubCategories.GetSubCategory;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
