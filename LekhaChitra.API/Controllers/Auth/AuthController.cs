@@ -1,4 +1,4 @@
-﻿using LekhaChitra.Application.Features.Auth.ForgotPassword.ResetPassword;
+﻿using LekhaChitra.Application.Features.Auth.ForgotPassword.ResetPassword.Command;
 using LekhaChitra.Application.Features.Auth.ForgotPassword.SendOtp.Command;
 using LekhaChitra.Application.Features.Auth.ForgotPassword.VerifyOtp.Command;
 using LekhaChitra.Application.Features.Auth.Login.Command;

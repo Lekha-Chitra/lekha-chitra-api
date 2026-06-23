@@ -1,11 +1,9 @@
 ﻿using LekhaChitra.Application.DTO.Clients;
-using LekhaChitra.Application.Features.Clients.AddClients;
-using LekhaChitra.Application.Features.Clients.FilterClients;
-using LekhaChitra.Application.Features.Clients.GetClients.GetAllClients;
-using LekhaChitra.Application.Features.SubCategories.AddSubCategory;
+using LekhaChitra.Application.Features.Clients.Command.AddClients;
+using LekhaChitra.Application.Features.Clients.Query.FilterClients;
+using LekhaChitra.Application.Features.Clients.Query.GetClients.GetAllClients;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LekhaChitra.API.Controllers.Clients

@@ -1,7 +1,10 @@
-﻿using LekhaChitra.Application.Features.Clients.AddClients;
-using LekhaChitra.Application.Features.Transaction.AddTransaction;
-using LekhaChitra.Application.Features.Transaction.DeleteTransaction;
-using LekhaChitra.Application.Features.Transaction.GetTransaction;
+﻿using LekhaChitra.Application.DTO.Clients;
+using LekhaChitra.Application.DTO.Transactions;
+using LekhaChitra.Application.Features.Clients.Query.FilterClients;
+using LekhaChitra.Application.Features.Transaction.Command.AddTransaction;
+using LekhaChitra.Application.Features.Transaction.Command.DeleteTransaction;
+using LekhaChitra.Application.Features.Transaction.Query.FilterTransaction;
+using LekhaChitra.Application.Features.Transaction.Query.GetTransaction;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -48,6 +51,19 @@ namespace LekhaChitra.API.Controllers.Transactions
             return StatusCode(result.StatusCode, result);
 
         }
+        [HttpGet]
+        [Route("filterTransaction")]
+        [Authorize]
+        public async Task<IActionResult> FilterTransactions([FromQuery] FilterTransactionRequestDTO filter,
+                                                      CancellationToken cancellationToken)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest("Model not valid");
+
+            var result = await _mediator.Send(new FilterTransactionQuery(filter), cancellationToken);
+            return StatusCode(result.StatusCode, result);
+        }
+
         [HttpDelete]
         [Route("deleteTransaction")]
         [Authorize]
