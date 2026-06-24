@@ -33,7 +33,8 @@ namespace LekhaChitra.Application.Features.Categories.Command.AddCategory
             }
             var categoryExists = await _uow.AsyncRepositories<Category>()
                                            .GetQueryable()
-                                           .Where(x => x.Name == request.Name)
+                                           .Where(x => x.Name == request.Name &&
+                                                        x.TenantId == tenantId)
                                            .FirstOrDefaultAsync(cancellationToken);
             if (categoryExists != null)
             {
