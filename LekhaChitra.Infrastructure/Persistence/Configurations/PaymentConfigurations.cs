@@ -29,10 +29,6 @@ namespace LekhaChitra.Infrastructure.Persistence.Configurations
                    .IsRequired()
                    .HasMaxLength(50);
 
-            //builder.Property(x => x.Status)
-            //       .IsRequired()
-            //       .HasMaxLength(30);
-
             builder.Property(x => x.TenantId)
                    .IsRequired();
 
@@ -41,6 +37,7 @@ namespace LekhaChitra.Infrastructure.Persistence.Configurations
             builder.Property(x => x.ModifiedDate);
 
             builder.HasIndex(x => x.TenantId);
+            builder.HasIndex(x => x.AddedDate);
 
             builder.HasOne(x => x.Transaction)
                    .WithOne(x => x.Payment)

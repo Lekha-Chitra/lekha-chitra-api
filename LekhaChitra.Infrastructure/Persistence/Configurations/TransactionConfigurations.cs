@@ -43,6 +43,8 @@ namespace LekhaChitra.Infrastructure.Persistence.Configurations
             builder.HasIndex(x => x.PaymentId)
                    .IsUnique();
 
+            builder.HasIndex(x => x.AddedDate);
+
             builder.HasOne(x => x.Payment)
                    .WithOne(x => x.Transaction)
                    .HasForeignKey<ClientTransaction>(x => x.PaymentId)
