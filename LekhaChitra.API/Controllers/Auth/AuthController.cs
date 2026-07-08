@@ -95,11 +95,27 @@ namespace LekhaChitra.API.Controllers.Auth
                     HttpOnly = true,
                     Secure = false, // dev only
                     SameSite = SameSiteMode.Lax,
-                    Expires = DateTime.UtcNow.AddHours(1),
+                    Expires = DateTime.UtcNow.AddHours(24),
                     Path = "/"
                 });
             }
             return StatusCode(result.StatusCode, result);
+
+        }
+
+        [HttpPost]
+        [Route("logout")]
+        [Authorize]
+        public async Task<IActionResult> Logout()
+        {
+            Response.Cookies.Delete("MyAuthValue", new CookieOptions
+            {
+                Path = "/",
+                HttpOnly = true,
+                Secure = false, // true in production
+                SameSite = SameSiteMode.Lax
+            });
+            return StatusCode(200, "Logged out successfully.");
 
         }
     }

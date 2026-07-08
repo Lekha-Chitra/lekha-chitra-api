@@ -30,7 +30,7 @@ namespace LekhaChitra.Application.Helpers.JwtHelper
             var tokenObject = new JwtSecurityToken(
                 issuer: _configuration["JWT:ValidIssuer"],
                 audience: _configuration["JWT:ValidAudience"],
-                expires: DateTime.Now.AddDays(30),
+                expires: DateTime.Now.AddHours(24),
                 claims: claims,
                 signingCredentials: new SigningCredentials(
                     authSecret,
