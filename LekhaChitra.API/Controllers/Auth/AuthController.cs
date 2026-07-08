@@ -102,5 +102,21 @@ namespace LekhaChitra.API.Controllers.Auth
             return StatusCode(result.StatusCode, result);
 
         }
+
+        [HttpPost]
+        [Route("logout")]
+        [Authorize]
+        public async Task<IActionResult> Logout()
+        {
+            Response.Cookies.Delete("MyAuthValue", new CookieOptions
+            {
+                Path = "/",
+                HttpOnly = true,
+                Secure = false, // true in production
+                SameSite = SameSiteMode.Lax
+            });
+            return StatusCode(200, "Logged out successfully.");
+
+        }
     }
 }
