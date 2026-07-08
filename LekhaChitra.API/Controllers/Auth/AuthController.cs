@@ -95,7 +95,7 @@ namespace LekhaChitra.API.Controllers.Auth
                     HttpOnly = true,
                     Secure = true,
                     SameSite = SameSiteMode.None,
-                    Expires = DateTime.UtcNow.AddHours(1),
+                    Expires = DateTime.UtcNow.AddHours(24),
                     Path = "/"
                 });
             }
