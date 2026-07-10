@@ -112,7 +112,7 @@ namespace LekhaChitra.API.Controllers.Auth
             {
                 Path = "/",
                 HttpOnly = true,
-                Secure = false, // true in production
+                Secure = true, // true in production
                 SameSite = SameSiteMode.Lax
             });
             return StatusCode(200, "Logged out successfully.");
