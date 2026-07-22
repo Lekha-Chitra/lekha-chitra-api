@@ -1,8 +1,13 @@
-﻿using LekhaChitra.Application.DTO.Email;
+﻿using Azure.Core.Pipeline;
+using LekhaChitra.Application.DTO.Email;
 using LekhaChitra.Application.Helpers.InMemoryDb.EmailDb;
 using LekhaChitra.Application.Interfaces.SmtpEmailService;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Polly;
+using Polly.Registry;
+using Polly.Retry;
 using System.Net;
 using System.Net.Mail;
 using System.Security.Cryptography;
@@ -12,11 +17,12 @@ namespace LekhaChitra.Application.Services.SmtpEmail
     public class EmailService : IEmailService
     {
         private readonly SmtpEmailSettingDTO _settings;
-       
-
-        public EmailService(IOptions<SmtpEmailSettingDTO> options)
+        private readonly ResiliencePipeline _resiliencePipeline;
+        public EmailService(IOptions<SmtpEmailSettingDTO> options,
+                            ResiliencePipelineProvider<string> pipelineProvider)
         {
             _settings = options.Value;
+            _resiliencePipeline = pipelineProvider.GetPipeline("smtp-email");
         }
 
         public string GenerateOtp()
@@ -28,27 +34,31 @@ namespace LekhaChitra.Application.Services.SmtpEmail
 
         public async Task SendAsync(string to, string subject, string body)
         {
-            using var client = new SmtpClient(_settings.Host)
+
+            await _resiliencePipeline.ExecuteAsync(
+            async cancellationToken =>
             {
-                Port = _settings.Port,
-                Credentials = new NetworkCredential(_settings.User, _settings.Password),
-                EnableSsl = _settings.EnableSsl
-            };
+                using var client = new SmtpClient(_settings.Host)
+                {
+                    Port = _settings.Port,
+                    Credentials = new NetworkCredential(_settings.User, _settings.Password),
+                    EnableSsl = _settings.EnableSsl
+                };
 
-            var mail = new MailMessage
-            {
-                From = new MailAddress(_settings.From),
-                Subject = subject,
-                Body = body,
-                IsBodyHtml = true
+                var mail = new MailMessage
+                {
+                    From = new MailAddress(_settings.From),
+                    Subject = subject,
+                    Body = body,
+                    IsBodyHtml = true
 
-            };
+                };
 
-            mail.To.Add(to);
+                mail.To.Add(to);
 
-            await client.SendMailAsync(mail);
+                 await client.SendMailAsync(mail, cancellationToken);
 
-          
+            });
         }
     }
 }
