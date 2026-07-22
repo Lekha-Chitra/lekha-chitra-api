@@ -56,7 +56,7 @@ namespace LekhaChitra.Application.Services.SmtpEmail
 
                 mail.To.Add(to);
 
-                 await client.SendMailAsync(mail, cancellationToken);
+                await client.SendMailAsync(mail, cancellationToken);
 
             });
         }

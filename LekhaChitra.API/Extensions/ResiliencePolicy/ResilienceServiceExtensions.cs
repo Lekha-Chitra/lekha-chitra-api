@@ -25,8 +25,8 @@ namespace LekhaChitra.API.Extensions.ResiliencePolicy
                            BackoffType =DelayBackoffType.Exponential,
                            UseJitter = true,
                            ShouldHandle = new PredicateBuilder()
-                                            .Handle<SmtpException>()
-                                            .Handle<TimeoutException>(),
+                                           .Handle<SmtpException>(SmtpResilienceHelper.IsTransientSmtpException)
+                                           .Handle<TimeoutException>(),
 
                            OnRetry = args =>
                            {
